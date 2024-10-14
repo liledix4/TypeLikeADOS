@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Type Like a DOS</title>
+	<link rel="stylesheet" href="engine/style.css">
+	<link rel="shortcut icon" href="engine/favicon.ico" type="image/x-icon">
+	<script src="engine/jquery.min.js"></script>
+	<script src="engine/loadfile-feature.js"></script>
+</head>
+<body>
+
+<div class="no-tabs-opened">
+	<div class="bg"></div>
+	<h1>No tabs opened!</h1>
+	<p>To start writing:</p>
+	<p>
+		<label onclick="newTab()">Create new tab</label>
+		<label for="load-file">Or load from TXT file!</label>
+	</p>
+</div>
+<div class="windows"></div>
+<div class="tabs">
+	<div class="toleft" title="Here you can toggle vertical or horizontal style of tabs list"></div>
+	<div class="list"></div>
+	<div class="plus" title="New tab"></div>
+	<div class="collection" title="Check documents collection!">^_^</div>
+</div>
+<div class="collection">
+	<h1>Here will be "Collection" soon! ^_^</h1>
+	<p>In future versions, you can open beautiful ready documents from this menu and edit them!</p>
+	</div>
+<div class="options">
+	<h1>TXT file</h1>
+	<p class="load-save">
+		<label for="load-file">Load</label>
+		<label class="save-file">Save</label>
+		<input type="file" id="load-file" accept="text/plain" style="display: none;">
+	</p>
+	<hr>
+	<h1>Add color block</h1>
+	<form onsubmit="return false">
+		<div class="example" contenteditable>This is what you'll see</div>
+		<div class="option background-color"><span class="label">Background:</span><input type="color" class="hash" value="#000000"></div>
+		<div class="option text-color"><span class="label">Text color:</span><input type="color" class="hash" value="#ffffff"></div>
+		<center><button class="apply">Create new block</button></center>
+	</form>
+	<hr>
+	<h1>Global options</h1>
+	<label class="option font">
+		<span class="label">Font:</span>
+		<select>
+			<option selected>Consolas</option>
+			<option>Courier New</option>
+			<option>Lucida Console</option>
+			<option>Lucida Sans Typewriter</option>
+			<option>Perfect DOS</option>
+		</select>
+	</label>
+	<label class="option font-size">
+		<span class="label">Font size: 11</span>
+		<input type="range" min="4" max="100" value="11" step="1"></input>
+	</label>
+	<hr>
+	<h1>Symbols to help</h1>
+	<p>Copy what you need!</p>
+	<textarea readonly>─│┌┐└┘├┤┬┴┼═║╒╓╔╕╖╗╘╙╚╛╜╝╞╟╠╡╢╣╤╥╦╧╨╩╪╫╬▀▄█▌▐░▒▓■□▪▫▬▲►▼◄♪♫☺☻●◌○◊←↑→↓↔↕√∆∏∑∂−∕∙∞∟∩∫≈≤≥⌂⌐⌠⌡☼◙◘♯©®†‡‰™Ω℮℅ꜛꜜꜝ•¶±§º⁰¹²³⁴⁵⁶⁷⁸⁹‹›</textarea>
+	</div>
+
+<script src="engine/script.js"></script>
+</body>
+</html>

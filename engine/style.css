@@ -1,0 +1,436 @@
+@font-face {
+	font-family: "Perfect DOS";
+	src: url("fonts/perfect_dos_vga_437/Perfect\ DOS\ VGA\ 437\ Win.ttf");
+	}
+
+
+*, :before, :after {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Consolas';
+	background: black;
+	color: white;
+	font-size: 11pt;
+	width: calc(100% - 300px);
+	margin: 0;
+}
+button {
+	cursor: pointer;
+}
+
+
+body > .no-tabs-opened {
+	position: fixed;
+	display: none;
+	top: 50%;
+	left: 0;
+	width: 100%;
+	margin-top: -130px;
+	text-align: center;
+	font-size: 11pt;
+	-webkit-user-select: none;
+	   -moz-user-select: none;
+		-ms-user-select: none;
+			user-select: none;
+	text-shadow: 0 5px 10px black;
+	padding: 50px 0;
+}
+body > .no-tabs-opened .bg {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	height: 0%;
+	width: 100%;
+	opacity: 0;
+	z-index: -1;
+	background: linear-gradient(90deg, red, blue, red);
+	background-size: 200% 100%;
+	animation: no-tabs-opened 20s infinite linear, no-tabs-opened-initial 2s forwards;
+}
+body > .no-tabs-opened label {
+	border: 2px solid rgb(0, 100, 200);
+	box-shadow: 0 5px 10px rgba(0, 0, 0, .5);
+	display: inline-block;
+	padding: 10px 20px;
+	color: black;
+	background: white;
+	cursor: pointer;
+	text-shadow: none;
+	transition: all .2s;
+}
+body > .no-tabs-opened label:not(:last-child) {
+	margin-right: 20px;
+}
+body > .no-tabs-opened label:hover {
+	background: rgb(0, 100, 200);
+	border-color: white;
+	color: white;
+}
+body > .no-tabs-opened label:active {
+	background: black;
+	border-color: white;
+	color: white;
+}
+body.no-tabs-opened > .no-tabs-opened {
+	display: block;
+}
+
+
+.type-here {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 300px;
+	height: 100%;
+	padding-bottom: 50px;
+	background: black;
+	color: white;
+	outline: none;
+	overflow-x: hidden;
+	overflow-y: auto;
+	display: none;
+}
+.type-here.opened {
+	display: block;
+}
+.type-here span {
+	position: relative;
+	display: inline-block;
+	cursor: text;
+	min-width: .5em;
+	max-width: 100%;
+}
+.type-here span:empty:after {
+	content: '[Type here]';
+	opacity: .5;
+}
+.type-here span:hover {
+	outline: 1px solid rgb(0, 100, 200);
+	box-shadow: 0 0 10px rgb(0, 100, 200);
+	z-index: 1;
+}
+body.tabs-to-left .type-here {
+	left: 300px;
+	padding-bottom: 0;
+}
+.type-here div:hover {
+	background: rgba(255, 255, 255, .1);
+}
+
+
+.tabs, .options {
+	background: white;
+	-webkit-user-select: none;
+	   -moz-user-select: none;
+		-ms-user-select: none;
+			user-select: none;
+}
+.tabs {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	max-width: calc(100% - 330px);
+	height: 50px;
+	padding: 0 10px;
+	white-space: nowrap;
+	overflow: auto;
+	overflow-y: hidden;
+	border-top-right-radius: 10px;
+	font-size: 11pt;
+	border: solid 4px black;
+	border-bottom: none;
+	border-left: none;
+}
+.tabs div:not(.list) {
+	position: relative;
+	display: inline-block;
+	padding: .35em .75em;
+	color: black;
+	cursor: pointer;
+	border-bottom-left-radius: .5em;
+	border-bottom-right-radius: .5em;
+	border: 1px solid transparent;
+	border-top-width: 0;
+	vertical-align: top;
+	overflow: hidden;
+}
+.tabs div:not(.list):hover {
+	background: rgba(0, 0, 0, .1);
+}
+.tabs .list {
+	display: inline;
+}
+.tabs .list .tab {
+	border-color: rgba(0, 0, 0, .3);
+}
+.tabs div:not(.list):active {
+	background: black;
+	color: white;
+}
+.tabs .plus {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.tabs .tab.opened .label {
+	cursor: text;
+	-webkit-user-select: text;
+	   -moz-user-select: text;
+		-ms-user-select: text;
+			user-select: text;
+}
+.tabs .toleft:before {content: "←";}
+.tabs .tab .label:empty:before {
+	content: "<untitled>";
+	opacity: .5;
+}
+.tabs .list .tab.opened {
+	border-color: black;
+	background: black;
+	color: white;
+	cursor: auto;
+}
+.tabs .tab .close {
+	margin-left: 1em;
+	cursor: pointer;
+	display: none;
+}
+.tabs .tab.opened .close {
+	display: inline;
+}
+.tabs .plus:before {
+	content: "+";
+}
+body.collection-opened .tabs .collection {
+	background: rgb(0, 100, 200);
+	color: white;
+}
+body.tabs-to-left .tabs {
+	top: 0;
+	bottom: auto;
+	height: auto;
+	width: 300px;
+	border-top: none;
+	border-radius: 0;
+	border-bottom-right-radius: 10px;
+	padding: 10px;
+	padding-right: 0;
+	overflow: auto;
+}
+body.tabs-to-left .tabs div:not(.list) {
+	display: block;
+	border-radius: .5em;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+	border-top-width: 1px;
+	border-right-width: 0;
+	padding-right: 20px;
+}
+body.tabs-to-left .tabs div.tab {
+	padding-right: 0;
+	white-space: normal;
+}
+body.tabs-to-left .tabs .tab.opened {
+	padding-right: 50px;
+}
+body.tabs-to-left .tabs .tab .close {
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 5px;
+	padding-right: 15px;
+	width: 50px;
+	text-align: center;
+}
+body.tabs-to-left .tabs .toleft:after,
+body.tabs-to-left .tabs .plus:after,
+body.tabs-to-left .tabs .collection:after {
+	float: right;
+}
+body.tabs-to-left .tabs .toleft:before {content: "↓";}
+body.tabs-to-left .tabs .toleft:after {content: " Move tabs to bottom";}
+body.tabs-to-left .tabs .plus:after {content: " New tab";}
+body.tabs-to-left .tabs .collection:after {content: " Collection";}
+
+
+body > .collection {
+	position: fixed;
+	bottom: 46px;
+	left: 10px;
+	right: 330px;
+	padding: 20px;
+	max-height: 50%;
+	border-radius: 20px;
+	border-bottom-left-radius: 0;
+	box-shadow: 0 -10px 10px rgba(0, 0, 0, .3);
+	color: white;
+	background: rgb(0, 100, 200);
+	display: none;
+	overflow: auto;
+	white-space: normal;
+	text-align: left;
+	-webkit-user-select: none;
+	   -moz-user-select: none;
+		-ms-user-select: none;
+			user-select: none;
+	font-size: 11pt;
+}
+body.collection-opened > .collection {
+	display: block;
+}
+body.tabs-to-left > .collection {
+	top: 10px;
+	left: 296px;
+	border-radius: 20px;
+	bottom: auto;
+	box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+}
+
+
+.options {
+	position: fixed;
+	color: black;
+	top: 0;
+	right: 0;
+	padding: 10px;
+	width: 300px;
+	height: 100%;
+	overflow: auto;
+	font-size: 11pt;
+	transition: right .4s;
+}
+body.no-tabs-opened .options {
+	right: -300px;
+}
+.options .example {
+	padding: 10px;
+	text-align: center;
+	margin-bottom: 10px;
+	border: 2px solid black;
+}
+.options .option {
+	position: relative;
+	margin-bottom: 15px;
+	display: flex;
+	justify-content: stretch;
+}
+.options .option .label {
+	flex-shrink: 0;
+	padding: 5px;
+	display: inline-block;
+}
+.options .option input,
+.options .option select {
+	position: relative;
+	display: inline-block;
+	font-family: inherit;
+	font-size: inherit;
+	width: 100%;
+	border-width: 0;
+	border-color: rgba(0, 0, 0, .3);
+	border-style: solid;
+	border-left-width: 1px;
+}
+.options .option input[type='color'] {
+	outline: none;
+	border-width: 1px;
+	-webkit-appearance: none;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+	padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+	border: none;
+}
+.options .option input[type='color']:hover {
+	outline: auto;
+}
+.options .option select {
+	padding: 5px;
+}
+.options .editable {
+	-webkit-user-select: text;
+	   -moz-user-select: text;
+		-ms-user-select: text;
+			user-select: text;
+}
+.options textarea {
+	min-width: 100%;
+	max-width: 100%;
+	min-height: 200px;
+	font-size: 15pt;
+	font-family: inherit;
+	letter-spacing: 10px;
+	line-height: 20pt;
+}
+.options .load-save {
+	display: flex;
+	justify-content: stretch;
+}
+.options .load-save label {
+	position: relative;
+	border: 2px solid rgb(0, 100, 200);
+	border-left-width: 0;
+	padding: 5px 0;
+	text-align: center;
+	color: black;
+	background: white;
+	cursor: pointer;
+	width: 100%;
+}
+.options .load-save label:hover {
+	background: rgb(0, 100, 200);
+	color: white;
+}
+.options .load-save label:active {
+	background: black;
+	border-color: black;
+	color: white;
+}
+.options .load-save label:first-child {
+	border-left-width: 2px;
+}
+
+
+.menu-window {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	height: 500px;
+	width: 800px;
+	margin-top: -250px;
+	margin-left: -400px;
+	overflow: auto;
+	border-radius: 20px;
+	background: white;
+	color: black;
+	padding: 20px;
+	display: none;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, .3);
+	font-size: 11pt;
+}
+.menu-window textarea {
+	min-width: 100%;
+	max-width: 100%;
+	min-height: 200px;
+}
+.menu-window.opened {
+	display: block;
+}
+.expimp-menu .mode {
+	display: none;
+	text-align: center;
+}
+.expimp-menu .mode.show {
+	display: block;
+}
+
+
+@keyframes no-tabs-opened {
+	from {background-position: 0% 0%;}
+	to {background-position: 200% 0;}
+}
+@keyframes no-tabs-opened-initial {
+	to {top: 0; height: 100%; opacity: 1;}
+}
